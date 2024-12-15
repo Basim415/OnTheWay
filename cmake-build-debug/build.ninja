@@ -61,6 +61,12 @@ build CMakeFiles/OnTheWay.dir/Package.cpp.o: CXX_COMPILER__OnTheWay_unscanned_De
   OBJECT_DIR = CMakeFiles/OnTheWay.dir
   OBJECT_FILE_DIR = CMakeFiles/OnTheWay.dir
 
+build CMakeFiles/OnTheWay.dir/Graph.cpp.o: CXX_COMPILER__OnTheWay_unscanned_Debug /Users/basimshahzad/CLionProjects/OnTheWay/Graph.cpp || cmake_object_order_depends_target_OnTheWay
+  DEP_FILE = CMakeFiles/OnTheWay.dir/Graph.cpp.o.d
+  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/OnTheWay.dir
+  OBJECT_FILE_DIR = CMakeFiles/OnTheWay.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target OnTheWay
@@ -69,7 +75,7 @@ build CMakeFiles/OnTheWay.dir/Package.cpp.o: CXX_COMPILER__OnTheWay_unscanned_De
 #############################################
 # Link the executable OnTheWay
 
-build OnTheWay: CXX_EXECUTABLE_LINKER__OnTheWay_Debug CMakeFiles/OnTheWay.dir/main.cpp.o CMakeFiles/OnTheWay.dir/Package.cpp.o
+build OnTheWay: CXX_EXECUTABLE_LINKER__OnTheWay_Debug CMakeFiles/OnTheWay.dir/main.cpp.o CMakeFiles/OnTheWay.dir/Package.cpp.o CMakeFiles/OnTheWay.dir/Graph.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
   OBJECT_DIR = CMakeFiles/OnTheWay.dir
   POST_BUILD = :
