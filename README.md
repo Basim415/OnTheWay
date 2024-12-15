@@ -1,0 +1,1 @@
+A C++ application for automating package delivery tasks. This app takes in details such as carrier name, package weight, destination, and receiver information, and calculates the fastest delivery route using graph-based optimization. Ideal for logistics and delivery management.
