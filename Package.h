@@ -15,24 +15,30 @@ private:
     string receiverName;
     string destinationBuilding;
     float weight;
+    double quantity;
+
 public:
     Package(); // Blank constructor
-    Package(string carrierName, string receiverName, string destinationBuilding, float weight);// Parametrized Constructor
+    Package(string carrierName, string receiverName, string destinationBuilding, float weight, double quantity);// Parametrized Constructor
     ~Package(); // Destructor
 
     //Gettters
     string getCarrierName(); //
     string getReceiverName();
     string getDestinationBuilding();
-    float getWeight() const;
+    float getWeight() ;
+    double getQuantity();
 
     //Setters
     void setCarrierName(const string &name);
     void setReceiverName(const string &name);
     void setDestinationBuilding(const string &building);
     void setWeight(float weight);
+    void setQuantity(double quantity);
 
-    friend ostream &operator<<(ostream &os, const Package &pack);
+
+    friend ostream &operator<<(ostream &os, const Package &pack); // Left as const so that it displays without changing
+    friend istream &operator>>(istream &is, Package &pack);
 
 };
 
