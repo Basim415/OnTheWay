@@ -4,6 +4,7 @@
 
 #include<iostream>
 #include<string>
+#include<cctype>
 #include "Package.h"
 using namespace std;
 
@@ -52,27 +53,51 @@ double Package::getQuantity() {
 }
 
 void Package::setCarrierName(const string &name) {
-    if (name == "") {
+    if (name.empty()) {
         cout << "Carrier name must be recorded" << endl;
-    } else {
-        carrierName = name;
+        return;
     }
-
+    for (int i = 0; i < name.size(); i++) {
+        if (!isalpha(name[i]) && name[i] != ' ' && name[i] != '-') {
+            cout << "Carrier name must be a valid character" << endl;
+            return;
+        }
+    }
+    carrierName = name;
 }
 
-void Package::setReceiverName(const string &name) {
+
+void Package::setReceiverName(const string &recname) {
+    if (recname == "") {
+        cout << "Receiver name must be recorded" << endl;
+    } else {
+        receiverName = recname;
+    }
 }
 
 void Package::setDestinationBuilding(const string &building) {
+    if (building == "") {
+        cout << "Building needed to complete delivery" << endl;
+    } else {
+        destinationBuilding = building;
+    }
 }
 
-//void Package::setWeight(float weight) {
-   // if {weight < 0.0) {
-       // cout << "Invalid weight" << endl;
-    //}
+void Package::setWeight(float weight) {
+    if (weight <= 0.0) {
+        cout << "Weight must be positive" << endl;
+    } else {
+        this->weight = weight;
+    }
+}
 
-    //}
-//}
+void Package::setQuantity(double quantity) {
+    if (quantity <= 0.0) {
+        cout << "Quantity must be positive" << endl;
+    } else {
+        this->quantity = quantity;
+    }
+}
 
 ostream &operator<<(std::ostream &os, const Package &pack) {
     os << "Carrier: " << pack.carrierName << "\n"

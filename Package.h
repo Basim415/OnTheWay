@@ -5,6 +5,7 @@
 #ifndef PACKAGE_H
 #define PACKAGE_H
 #include <string>
+#include <cctype>
 
 using namespace std;
 
@@ -22,11 +23,11 @@ public:
     Package(string carrierName, string receiverName, string destinationBuilding, float weight, double quantity);// Parametrized Constructor
     ~Package(); // Destructor
 
-    //Gettters
-    string getCarrierName(); //
+    //Getters
+    string getCarrierName();
     string getReceiverName();
     string getDestinationBuilding();
-    float getWeight() ;
+    float getWeight();
     double getQuantity();
 
     //Setters
