@@ -17,6 +17,7 @@ private:
     string destinationBuilding;
     float weight;
     double quantity;
+    bool isDelivered = false;
 
 public:
     Package(); // Blank constructor
@@ -40,6 +41,8 @@ public:
 
     friend ostream &operator<<(ostream &os, const Package &pack); // Left as const so that it displays without changing
     friend istream &operator>>(istream &is, Package &pack);
+    friend bool operator==(const Package &pack1, const Package &pack2);
+    bool markAsDelivered();
 
 };
 

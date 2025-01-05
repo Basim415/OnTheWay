@@ -3,9 +3,13 @@
 //
 
 #include<iostream>
+#include <iomanip>
 #include<string>
 #include<cctype>
+#include <cmath>
 #include "Package.h"
+
+#include <__ranges/elements_view.h>
 using namespace std;
 
 Package::Package() {
@@ -14,6 +18,7 @@ Package::Package() {
     destinationBuilding = "No destination";
     weight = 0.0;
     quantity = 0;
+
 
     cout << "Default constructor called" << endl;
 }
@@ -68,35 +73,71 @@ void Package::setCarrierName(const string &name) {
 
 
 void Package::setReceiverName(const string &recname) {
-    if (recname == "") {
+    if (recname.empty()) {
         cout << "Receiver name must be recorded" << endl;
-    } else {
-        receiverName = recname;
+        return;
     }
+    for (int i = 0; i < recname.size(); i++) {
+        if (!isalpha(recname[i]) && recname[i] != ' ' && recname[i] != '-') {
+            cout << "Receiver name must be a valid character" << endl;
+            return;
+        }
+    }
+    receiverName = recname;
 }
 
 void Package::setDestinationBuilding(const string &building) {
-    if (building == "") {
-        cout << "Building needed to complete delivery" << endl;
-    } else {
+    if (building.empty()) {
+        cout << "Destination name must be recorded" << endl;
+        return;
+    }
+    for (int i = 0; i < building.size(); i++) {
+        if (!isalpha(building[i]) && building[i] != ' ' && building[i] != '-') {
+            cout << "Destination name must be a valid destination" << endl;
+            return;
+        }
         destinationBuilding = building;
     }
 }
 
 void Package::setWeight(float weight) {
-    if (weight <= 0.0) {
-        cout << "Weight must be positive" << endl;
-    } else {
-        this->weight = weight;
+    float max_wt = 1000.0;
+    float min_wt = 0.0;
+
+    if (isnan(weight) || isinf(weight)) {
+        cout << "Weight must be a finite numeric value." << endl;
+        return;
     }
+    if (weight <= min_wt) {
+        cout << "Weight must be at least the minimum weight. " << endl;
+        return;
+    }
+    if (weight >= max_wt) {
+        cout << "Weight cannot exceed the maximum weight. " << endl;
+        return;
+    }
+
+    this -> weight = weight;
 }
 
 void Package::setQuantity(double quantity) {
-    if (quantity <= 0.0) {
-        cout << "Quantity must be positive" << endl;
-    } else {
-        this->quantity = quantity;
+    double max_qt = 100.0;
+    double min_qt = 0.0;
+
+    if (isnan(quantity) || isinf(quantity)) {
+        cout << "Quantity must be a finite numeric value." << endl;
+        return;
     }
+    if (quantity <= min_qt) {
+        cout << "Quantity must be at least the minimum quantity. " << endl;
+        return;
+    }
+    if (quantity >= max_qt) {
+        cout << "Quantity must be at least the maximum quantity. " << endl;
+    }
+
+    this->quantity = quantity;
+
 }
 
 ostream &operator<<(std::ostream &os, const Package &pack) {
@@ -128,5 +169,16 @@ istream &operator>>(std::istream &is, Package &pack) {
     return is;
 }
 
+bool operator==(const Package &p1, const Package &p2) {
+    return (p1.carrierName == p2.carrierName &&
+            p1.receiverName == p2.receiverName &&
+            p1.destinationBuilding == p2.destinationBuilding &&
+            p1.weight == p2.weight &&
+            p1.quantity == p2.quantity);
+}
 
+bool Package::markAsDelivered() {
+    this -> isDelivered = true;
+    return isDelivered;
 
+}
