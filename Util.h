@@ -7,6 +7,7 @@
 #include <iostream>
 #include <list>
 #include "Package.h"
+#include "Graph.h"
 
 using namespace std;
 
@@ -16,6 +17,6 @@ void addPackage(list<Package> &packlist);
 void displayPacklist(const list<Package> &packlist);
 void removePackage(list<Package> &packlist);
 void delivered(list<Package> &packlist);
-void menuLogic(list<Package> &packlist, list<Package>::iterator &current_pack);
+void menuLogic(Graph &graph, list<Package> &packlist);
 
 #endif // UTIL_H

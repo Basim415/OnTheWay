@@ -20,16 +20,16 @@ private:
     bool isDelivered = false;
 
 public:
-    Package(); // Blank constructor
+    Package() = default; // Blank constructor
     Package(string carrierName, string receiverName, string destinationBuilding, float weight, double quantity);// Parametrized Constructor
-    ~Package(); // Destructor
+    ~Package()= default; // Destructor
 
     //Getters
-    string getCarrierName();
-    string getReceiverName();
-    string getDestinationBuilding();
-    float getWeight();
-    double getQuantity();
+    string getCarrierName() const;
+    string getReceiverName() const;
+    string getDestinationBuilding() const;
+    float getWeight() const;
+    double getQuantity() const;
 
     //Setters
     void setCarrierName(const string &name);

@@ -2,11 +2,14 @@
 // Created by Basim Shahzad on 12/15/24.
 //
 #include "Graph.h"
+#include "Package.h"
 
 #include <vector>
+#include <queue>
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
+#include <unordered_set>
 
 using namespace std;
 
@@ -58,9 +61,10 @@ void Graph::Resize(size_t newSize) {
     }
 }
 
-vector<string>::iterator Graph::searchNode(string name) {
-    return find(buildingList.begin(), buildingList.end(), name);
+vector<string>::iterator Graph::searchNode(const string &buildingname) {
+    return find(buildingList.begin(), buildingList.end(), buildingname);
 }
+
 
 void Graph::insertEdge(string fromNode, string toNode) {
     // Ensure both nodes exist in the graph
@@ -127,4 +131,74 @@ void Graph::printGraph() {
         }
         cout << endl;
     }
+}
+
+
+
+vector<string> Graph::findOptimalRoute(const list<Package> &packages) {
+    queue<int> q;
+    vector<bool> visited(numBuildings, false);
+    vector<int> parent(numBuildings, -1);
+    unordered_set<string> route;
+    vector<int> deliveryNodes;
+    vector<string> result;
+
+    if (packages.empty()) return {};
+
+    for (auto &p : packages) {
+        route.insert(p.getDestinationBuilding());
+    }
+
+    for (const string &destination : route) {
+        auto it = searchNode(destination);
+        if (it != buildingList.end()) {
+            int nodeIndex = distance(buildingList.begin(), it);
+            deliveryNodes.push_back(nodeIndex);
+        }
+    }
+
+    auto startIt = searchNode("Maintenance/Utility");
+    if (startIt == buildingList.end()) {
+        cerr << "Error: Starting node 'Maintenance/Utility' not found!" << endl;
+        return {};
+    }
+    int startNode = distance(buildingList.begin(), startIt);
+
+    q.push(startNode);
+    visited[startNode] = true;
+
+    while (!q.empty()) {
+        int current = q.front();
+        q.pop();
+
+        for (int i = 0; i < numBuildings; i++) {
+            if (adjMatrix[current][i] == 1 && !visited[i]) {
+                visited[i] = true;
+                parent[i] = current;
+                q.push(i);
+            }
+        }
+    }
+
+    vector<int> deliveryOrder;
+    unordered_set<int> seen; // Ensure no duplicate paths
+    for (int destination : deliveryNodes) {
+        vector<int> path;
+        int step = destination;
+
+        while (step != -1) {
+            if (seen.count(step)) break; // Avoid duplicate cycles
+            path.push_back(step);
+            seen.insert(step);
+            step = parent[step];
+        }
+        reverse(path.begin(), path.end());
+        deliveryOrder.insert(deliveryOrder.end(), path.begin(), path.end());
+    }
+
+    for (int node : deliveryOrder) {
+        result.push_back(buildingList[node]);
+    }
+
+    return result;
 }

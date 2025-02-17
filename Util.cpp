@@ -1,8 +1,9 @@
 //
 // Created by Basim Shahzad on 2/11/25.
 //
-
-#include "util.h"
+#include "Package.h"
+#include "Graph.h"
+#include "Util.h"
 
 void displayMenu() {
     cout << "\n1 - Add a package" << endl;
@@ -118,7 +119,7 @@ void delivered(list<Package> &packlist) {
     cout << "No matching package found." << endl;
 }
 
-void menuLogic(list<Package> &packlist, list<Package>::iterator &current_pack) {
+void menuLogic(Graph &graph, list<Package> &packlist) {
     int user_choice;
     do {
         displayMenu();
@@ -129,36 +130,38 @@ void menuLogic(list<Package> &packlist, list<Package>::iterator &current_pack) {
         switch (user_choice) {
             case 1:
                 addPackage(packlist);
-                break;
-
+            break;
             case 2:
                 displayPacklist(packlist);
-                break;
-
+            break;
             case 3:
-                if (packlist.empty()) {
-                    cout << "There is no route." << endl;
+            {
+                vector<string> route = graph.findOptimalRoute(packlist);
+                if (route.empty()) {
+                    cout << "No route found!" << endl;
                 } else {
-                    cout << "Route displayed here." << endl;  // Placeholder for future logic
+                    cout << "Optimal Delivery Route:" << endl;
+                    for (const auto &location : route) {
+                        cout << location << " -> ";
+                    }
+                    cout << "END" << endl;
                 }
-                break;
-
+            }
+            break;
             case 4:
                 removePackage(packlist);
-                break;  // Fixed missing break
-
+            break;
             case 5:
                 delivered(packlist);
-                break;
-
+            break;
             case 0:
                 cout << "Exiting program..." << endl;
-                break;
-
+            break;
             default:
                 cout << "Unknown selection. Please try again." << endl;
-                break;
+            break;
         }
     } while (user_choice != 0);
 }
+
 

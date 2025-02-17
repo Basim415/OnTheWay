@@ -35,10 +35,8 @@ public:
     void Resize(size_t newSize);
     bool searchEdge(string fromNode, string toNode);
     void printGraph();
-    vector<string>:: iterator searchNode(string name);
+    vector <string>::iterator searchNode(const string &buildingname);
     vector<string> findOptimalRoute(const list<Package> &packages);
-
-
 };
 
 #endif //GRAPH_H

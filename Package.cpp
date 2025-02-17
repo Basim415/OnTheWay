@@ -2,12 +2,12 @@
 // Created by Basim Shahzad on 12/15/24.
 //
 
+#include "Package.h"
 #include<iostream>
 #include <iomanip>
 #include<string>
 #include<cctype>
 #include <cmath>
-#include "Package.h"
 
 #include <__ranges/elements_view.h>
 using namespace std;
@@ -29,31 +29,25 @@ Package::Package(string carrierName, string receiverName, string destinationBuil
     this->destinationBuilding = destinationBuilding;
     this->weight = weight;
     this->quantity = quantity;
-
-    cout << "Paramterized constructor called" << endl;
 }
 
-Package::~Package() {
-    cout << "Destructor called" << endl;
-}
-
-string Package::getCarrierName() {
+string Package::getCarrierName() const {
     return carrierName;
 }
 
-string Package::getReceiverName() {
+string Package::getReceiverName() const {
     return receiverName;
 }
 
-string Package::getDestinationBuilding() {
+string Package::getDestinationBuilding() const {
     return destinationBuilding;
 }
 
-float Package::getWeight() {
+float Package::getWeight() const {
     return weight;
 }
 
-double Package::getQuantity() {
+double Package::getQuantity() const {
     return quantity;
 }
 
