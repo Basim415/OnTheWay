@@ -10,7 +10,7 @@ using namespace std;
 
 int main() {
     // Step 1: Create a Graph with predefined buildings
-    Graph schoolGraph(23);  // Assume 24 buildings & locations
+    Graph schoolGraph(24);  // Assume 24 buildings & locations
     schoolGraph.insertNode("Receiving");
     schoolGraph.insertNode("Maintenance");
     schoolGraph.insertNode("Mail Room");
