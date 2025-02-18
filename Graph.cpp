@@ -157,9 +157,9 @@ vector<string> Graph::findOptimalRoute(const list<Package> &packages) {
         }
     }
 
-    auto startIt = searchNode("Maintenance/Utility");
+    auto startIt = searchNode("Receiving");
     if (startIt == buildingList.end()) {
-        cerr << "Error: Starting node 'Maintenance/Utility' not found!" << endl;
+        cerr << "Error: Starting node Receiving not found!" << endl;
         return {};
     }
     int startNode = distance(buildingList.begin(), startIt);
