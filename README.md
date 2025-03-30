@@ -33,7 +33,7 @@ This project simulates real-world delivery logic and was created as a practical 
 
 ---
 
-## 🧪 How It Works
+## 🧭 How It Works
 
 1. The app builds a graph of LMC's campus buildings as nodes.
 2. Users can add packages with delivery details.
